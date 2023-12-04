@@ -205,15 +205,24 @@ function handleCommitResponse545(participantID, inputField, checkmark) {
     console.log(writeAheadLog545);
   }
 
+    // Define a global variable for the base URL
+  let baseUrl = 'http://localhost:4200';
+
+  // Function to set the base URL
+  function setBaseUrl(url) {
+    baseUrl = url;
+  }
   async function saveLogToMongoDB545(logData) {
     try {
-      const baseUrl = process.env.BASE_URL || 'http://localhost:4200';
+      // Set the base URL before making the request
+      setBaseUrl('https://morning-garden-77909-7c27190c9f61.herokuapp.com');
+  
       const response = await fetch(`${baseUrl}/save-log`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ logData }), // Pass the log data in the request body
+        body: JSON.stringify({ logData }),
       });
   
       const result = await response.text();
