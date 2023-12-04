@@ -1,0 +1,67 @@
+/* styles.css */
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Press Start 2P', cursive;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 2em;
+  }
+  
+  #timer {
+    font-size: 1.2em;
+    margin-top: 10px;
+  }
+  
+  button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border: none;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+  
+  #countdown {
+    color: #e74c3c;
+  }
+  
+  #cordinatorPrepare,
+  #cordinatorCommit,
+  #participantResponses,
+  #participantResponsesAgain {
+    margin-top: 20px;
+  }
+  
+  p {
+    font-size: 1em;
+    margin: 5px 0;
+    margin-top: 30px;
+  }
+  
+  #logDisplayButton {
+    background-color: #e74c3c; /* Red color */
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+  }
+  
+  /* Increase the size of input fields */
+  input {
+    width:300px; /* Adjust the width as needed */
+    padding: 10px; /* Adjust the padding as needed */
+    font-size: 1em; /* Font size for input */
+  }
+
+  
+  

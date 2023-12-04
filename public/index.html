@@ -1,0 +1,26 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSCI 4140 Assignment 5</title>
+  <base href="/">
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/styles.css">
+
+</head>
+<body>
+  <h1>2-Phase Commit Simulation</h1> 
+  <div id="timer">Time remaining: <span id="countdown">20</span> seconds</div>
+  <button id="logDisplayButton" onclick="logDisplay545()">Display Current Log</button>
+  <button onclick="startTransaction545()">Start Transaction</button>
+  <div id="cordinatorPrepare"></div>
+  <button onclick="prepareToCommit545()">Send to Participants</button>
+  <div id="participantResponses"></div>
+  <div id="cordinatorCommit"></div>
+  <div id="participantResponsesAgain"></div>
+  <script src="log.js"></script>  
+  <script src="commit.js"></script>  
+</body>
+</html>
