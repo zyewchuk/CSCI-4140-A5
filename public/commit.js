@@ -2,6 +2,7 @@
 let timeout;
 let countdownValue = 20;
 
+
 function startTransaction545() {
     // Simulate starting the transaction
     console.log('Transaction started');
@@ -206,7 +207,8 @@ function handleCommitResponse545(participantID, inputField, checkmark) {
 
   async function saveLogToMongoDB545(logData) {
     try {
-      const response = await fetch('http://localhost:4200/save-log', {
+      const baseUrl = process.env.BASE_URL || 'http://localhost:4200';
+      const response = await fetch(`${baseUrl}/save-log`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -220,3 +222,4 @@ function handleCommitResponse545(participantID, inputField, checkmark) {
       console.error('Error saving log to MongoDB:', err);
     }
   }
+  

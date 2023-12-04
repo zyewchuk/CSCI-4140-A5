@@ -2,6 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { MongoClient } = require('mongodb');
+const cors = require('cors');
 
 // Correct the import
 const { WriteAheadLog545 } = require('./public/log.js');
@@ -25,7 +26,7 @@ async function connectToDB() {
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
-
+app.use(cors());
 // Serve static files (like JS) from the 'public' directory
 app.use(express.static('public'));
 app.use(bodyParser.json());
