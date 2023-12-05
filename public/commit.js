@@ -46,6 +46,7 @@ function startTransaction545() {
   }
   // displying commit message from the cordinator
   function displayCommitMessage545(message) {
+    logMessage545('Coordinator', 'Participants', message);
     const paragraph = document.createElement('p');
     paragraph.innerHTML = message;
     const cordinatorPrepare = document.getElementById('cordinatorCommit');
@@ -112,8 +113,7 @@ function startTransaction545() {
 
         secondContainer545();
         resetTimer545();
-        logMessage545('Coordinator', 'Participants', 'C,1, commit');
-        logMessage545('Coordinator', 'Participants', 'C,2, commit');
+        
       }
     } else {
         checkmark.style.display = 'none';
@@ -191,8 +191,8 @@ function handleCommitResponse545(participantID, inputField, checkmark) {
     saveLogToMongoDB545(logData);
   }
   // logging into writeAheadLog
-  function logMessage545(sender, id, messageType) {
-    writeAheadLog545.addMessage(sender, id, messageType);
+  function logMessage545(sender, receiver, messageType) {
+    writeAheadLog545.addMessage(sender, receiver, messageType);
   }
   //displaying log on console when toggles
   function logDisplay545(){

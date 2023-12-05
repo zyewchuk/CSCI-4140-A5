@@ -5,11 +5,11 @@ class WriteAheadLog545 {
     }
   
     // Add a message to the log
-    addMessage(sender, id, fullMessage) {
+    addMessage(sender, receiver, fullMessage) {
       const logEntry = {
         timestamp: new Date().toISOString(),
         sender,
-        id,
+        receiver,
         fullMessage,
       };
       this.log.push(logEntry);
