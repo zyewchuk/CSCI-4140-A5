@@ -42,6 +42,7 @@ app.get('/get-log', (req, res) => {
   res.json({ logData });
 });
 
+// saving log
 app.post('/save-log', async (req, res) => {
   try {
     const db = client.db(dbName);

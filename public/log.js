@@ -1,5 +1,4 @@
 // log.js
-
 class WriteAheadLog545 {
     constructor() {
       this.log = [];
@@ -23,5 +22,4 @@ class WriteAheadLog545 {
   }
   const writeAheadLog545 = new WriteAheadLog545();
 
- // module.exports = WriteAheadLog;
   

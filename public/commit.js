@@ -1,7 +1,5 @@
-
-let timeout;
+ // timer set to 20 seconds
 let countdownValue = 20;
-
 
 function startTransaction545() {
     // Simulate starting the transaction
@@ -39,31 +37,26 @@ function startTransaction545() {
   }
   
   function displayPrepareMessage545(message) {
+    // logging messages into writeAheadLog
     logMessage545('Coordinator', 'Participants', message);
-     // Create a new paragraph element
      const paragraph = document.createElement('p');
-     // Set the HTML content of the paragraph
      paragraph.innerHTML = message;
-     // Append the paragraph to the cordinatorPrepare element
      const cordinatorPrepare = document.getElementById('cordinatorPrepare');
      cordinatorPrepare.appendChild(paragraph);
   }
+  // displying commit message from the cordinator
   function displayCommitMessage545(message) {
-    
-    // Create a new paragraph element
     const paragraph = document.createElement('p');
-    // Set the HTML content of the paragraph
     paragraph.innerHTML = message;
-    // Append the paragraph to the cordinatorPrepare element
     const cordinatorPrepare = document.getElementById('cordinatorCommit');
     cordinatorPrepare.appendChild(paragraph);
   }
-
+  // initializing input for participant
   function prepareToCommit545() {
     createParticipantInput545(1);
     createParticipantInput545(2);
   }
-  
+  // function to create input fields for participant
   function createParticipantInput545(participantID, container, isSecondSet) {
     const inputContainer = container || document.getElementById('participantResponses');
 
@@ -79,7 +72,7 @@ function startTransaction545() {
     checkmark.innerHTML = '✓';
     checkmark.style.color = 'green';
     checkmark.style.fontSize = '2.5em'
-    checkmark.style.display = 'none'; // Initially hidden
+    checkmark.style.display = 'none'; 
 
 
     const submitButton = document.createElement('button');
@@ -91,17 +84,16 @@ function startTransaction545() {
         // Create a new function for the second set of buttons
         submitButton.onclick = () => handleCommitResponse545(participantID, input, checkmark, isSecondSet);
     }
-
     // Add line breaks between elements for better layout
     inputContainer.appendChild(label);
     inputContainer.appendChild(input);
     inputContainer.appendChild(submitButton);
     inputContainer.appendChild(checkmark);
-    inputContainer.appendChild(document.createElement('br')); // Line break
+    inputContainer.appendChild(document.createElement('br')); 
 }
-
+  // count for amount of correct responses
   let readyCount = 0;
-  
+  // handle participant first resoponse
   function handleParticipantResponse545(participantID, inputField, checkmark) {
   const messageType = inputField.value;
   logMessage545(`Participant ${participantID}`, 'Coordinator', `C, ${participantID}, ${messageType}`);
@@ -115,7 +107,9 @@ function startTransaction545() {
       // Display message for commit 
       displayCommitMessage545(`P, ${participantID}, commit`);
       readyCount++;
+      // if there are two correct readyToCommit responses
       if(readyCount ===2 ){
+
         secondContainer545();
         resetTimer545();
         logMessage545('Coordinator', 'Participants', 'C,1, commit');
@@ -123,11 +117,12 @@ function startTransaction545() {
       }
     } else {
         checkmark.style.display = 'none';
-      // Display alert for other input than "readyToCommit"
+      // error checking to make sure that responses are readyToCommit if not, transaction aborted
       alert(`All of the participants did not vote "readyToCommit", therefore transaction is aborted. Page will now refresh.`);
       location.reload();
     }
   } else {
+    // input validation
     console.error('Invalid messageType entered');
 
     // Hide checkmark
@@ -150,16 +145,16 @@ function secondContainer545() {
     createParticipantInput545(1, secondInputContainer, true); // Pass true for isSecondSet
     createParticipantInput545(2, secondInputContainer, true); // Pass true for isSecondSet
 }
-
+//count for correct amount of commit messages
 let commitCount =0;
-
+// handling commit responses by participant
 function handleCommitResponse545(participantID, inputField, checkmark) {
     const messageType2 = inputField.value;
     logMessage545(`Participant ${participantID}`, 'Coordinator', `C, ${participantID}, ${messageType2}`);
     // Validate messageType
   if (['readyToCommit', 'abort', 'commit', 'timeout'].includes(messageType2)) {
 
-    // Check if the input is "readyToCommit"
+    // Check if the input is "commit"
     if (messageType2 === 'commit') {
         //show checkmark
         checkmark.style.display = 'inline';
@@ -171,22 +166,20 @@ function handleCommitResponse545(participantID, inputField, checkmark) {
         
       }
     } else {
-        // show x when incorrect input
+      
         checkmark.style.display = 'none';
-      // Display alert for other input than "readyToCommit"
       alert(`All of the participants did not vote "commit", therefore transaction is aborted. Page will now refresh.`);
       location.reload();
     }
   } else {
     console.error('Invalid messageType entered');
-
     // Hide checkmark
     checkmark.style.display = 'none';
     // Display alert for invalid input
     alert('Invalid input. Please enter "readyToCommit", "abort", "timeout" or "commit"');
   }
   }
-  
+  // function for when all fields are correct
   function success545() {
     const successMessage = document.createElement('p');
     successMessage.textContent = 'Transaction committed successfully!';
@@ -197,14 +190,14 @@ function handleCommitResponse545(participantID, inputField, checkmark) {
     const logData = writeAheadLog545.getLog();
     saveLogToMongoDB545(logData);
   }
-
+  // logging into writeAheadLog
   function logMessage545(sender, id, messageType) {
     writeAheadLog545.addMessage(sender, id, messageType);
   }
+  //displaying log on console when toggles
   function logDisplay545(){
     console.log(writeAheadLog545);
   }
-
     // Define a global variable for the base URL
   let baseUrl = 'http://localhost:4200';
 
@@ -212,6 +205,7 @@ function handleCommitResponse545(participantID, inputField, checkmark) {
   function setBaseUrl(url) {
     baseUrl = url;
   }
+  // writting data to mongoDb database
   async function saveLogToMongoDB545(logData) {
     try {
       // Set the base URL before making the request

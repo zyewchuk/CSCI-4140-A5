@@ -12,15 +12,24 @@
 </head>
 <body>
   <h1>2-Phase Commit Simulation</h1> 
+  <!-- timer for simulating timeouts -->
   <div id="timer">Time remaining: <span id="countdown">20</span> seconds</div>
+  <!-- anytime the user can press this button and view the current log -->
   <button id="logDisplayButton" onclick="logDisplay545()">Display Current Log</button>
   <button onclick="startTransaction545()">Start Transaction</button>
+  <!-- displaying cordinator prepareToCommit messages -->
   <div id="cordinatorPrepare"></div>
+  <!-- button to send the cordinator messages to participants and trigger reply -->
   <button onclick="prepareToCommit545()">Send to Participants</button>
+  <!-- input fields for participants to reply to cordinator message -->
   <div id="participantResponses"></div>
+  <!-- displaying cordinator commit message -->
   <div id="cordinatorCommit"></div>
+  <!-- displaying participant input fields after cordinator commits -->
   <div id="participantResponsesAgain"></div>
+  <!-- tagging log script  -->
   <script src="log.js"></script>  
+  <!-- client side code  -->
   <script src="commit.js"></script>  
 </body>
 </html>
